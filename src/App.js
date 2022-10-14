@@ -13,7 +13,7 @@ function App() {
   const [gameStart, setGameStart] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [move, setMove] = useState(0);
-  const [difficulty, setDifficulty] = useState(1);
+  const [difficulty, setDifficulty] = useState(0);
   const [winner, setWinner] = useState(0);
   const [turn, setTurn] = useState(player);
   const [grid, setGrid] = useState(createGrid());
@@ -165,7 +165,7 @@ function App() {
       }
     }
   }, [move])
-
+console.log(difficulty)
   useEffect(() => {
     if (winner > 0) {
       setGameOver(true);
@@ -194,7 +194,11 @@ function App() {
 
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand>React Tic-Tac-Toe</Navbar.Brand>
+          <Navbar.Brand>
+            React Tic-Tac-Toe
+            {difficulty == 0 && <span className="text-muted"> Normal Mode</span>}
+            {difficulty == 1 && <span className="text-muted"> Hard Mode</span>}
+          </Navbar.Brand>
         </Container>
       </Navbar>
 
@@ -240,7 +244,7 @@ function App() {
         <form onSubmit={handleSubmit}>
           <Modal.Body className="text-center">
             <Form.Group className="py-3">
-              <h6>SELECT DIFFICULTY MODE</h6>
+              <h6>SELECT DIFFICULTY</h6>
               <Form.Check inline label="Mode Normal" name="mode" id="modeNormal" type="radio" value="0" defaultChecked />
               <Form.Check inline label="Mode Hard" name="mode" id="modeHard" type="radio" value="1" />
             </Form.Group>
@@ -262,7 +266,7 @@ function App() {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="info" onClick={handleRestart}>Restart Game</Button>
-          <Button variant="warning" onClick={handleOption}>Change Difficult Mode</Button>
+          <Button variant="warning" onClick={handleOption}>Change Difficulty</Button>
         </Modal.Footer>
       </Modal>
     </div>
